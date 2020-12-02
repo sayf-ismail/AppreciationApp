@@ -47,6 +47,16 @@ get '/' do
   }
 end
 
+post '/wallposts' do
+  giver = params["giver"]
+  receiver = params["receiver"]
+  user_posts = params["user_posts"]
+  post_image = params["post_image"]
+  run_sql("INSERT INTO posts(giver, receiver, message, timestamp, image_url) VALUES('#{giver}', '#{receiver}', '#{user_posts}', current_timestamp, '#{post_image}')")
+
+  redirect '/'
+end
+
 get '/users/signup' do
   erb :'/users/signup'
 end

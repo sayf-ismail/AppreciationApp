@@ -5,6 +5,38 @@
     <a href="/users/signup">New User? Sign Up!</a><br>
     <a href="/login">Existing User? Log In!</a><br>
 
+<% if logged_in? %>
+    <form action="/sessions" method="POST">
+        <input type="hidden" name="_method" value="delete">
+        <button>Logout</button>
+    </form>
+
+    <h3>Who would you like to celebrate next, <%= current_user()['user_handle']%>?</h3>
+    <div class="inputform">
+        <form action="/wallposts" method="POST">
+            
+            <select name="receiver" id="receiver">
+                <% users.each do |user| %>
+                    <option value="<% user["user_handle"] %>">
+                        <% user["user_handle"] %>
+                    </option>
+                <% end %>
+            </select><br>
+
+            <input type="hidden" id="giverinput" name="giver" value="<%= current_user()['user_handle'] %>">
+
+            <input type="text" id="messages" name="user_posts" placeholder="Your message..."><br>
+            
+            <label for="">Image/GIF URL</label><br>
+            <input type="text" id="post_image" name="post_image" placeholder="Paste URL here..."><br>
+
+            <input type="submit" value="Share Your Appreciation">
+        </form>
+    </div>
+
+
+<% end %>
+
     <% posts.each do |post| %>
         <p><%= post["timestamp"] %></p>
         <h2><%= post["giver"] %>: <strong>+20 @<%= post["receiver"] %></strong></h2>
