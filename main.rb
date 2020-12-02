@@ -77,7 +77,7 @@ post '/sessions' do
   users = run_sql("SELECT * FROM users WHERE email='#{user_email}'")
   user = user_found(users)
 
-  if BCrypt::Password.new(user['password_digest']) == params['password']
+  if user && BCrypt::Password.new(user['password_digest']) == params['password']
     # Log the user in
     session[:user_id] = user['id']
 
