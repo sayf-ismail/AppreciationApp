@@ -33,7 +33,7 @@ post '/users' do
 
   password_digest = BCrypt::Password.create(user_password)
 
-  run_sql("INSERT INTO users(user_handle, email, user_password, user_image_URL) VALUES('#{user_handle}', '#{user_email}', '#{user_password}', '#{user_image_URL}')")
+  run_sql("INSERT INTO users(user_handle, email, user_password, user_image_url) VALUES('#{user_handle}', '#{user_email}', '#{user_password}', '#{user_image_url}')")
 
   redirect '/'
 end
