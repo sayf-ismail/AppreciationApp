@@ -13,8 +13,10 @@ def run_sql(sql)
 end
 
 get '/' do
-  run_sql("SELECT * FROM posts;")
-  erb :'/wallposts/index'
+  posts = run_sql("SELECT * FROM posts ORDER BY ID")
+  erb :'/wallposts/index', locals: {
+    posts: posts
+  }
 end
 
 
