@@ -8,6 +8,6 @@ section {
     text-align: center;
 }
 
-p {
+.messages {
     width: 300px;
 }

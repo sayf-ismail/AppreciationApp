@@ -8,7 +8,9 @@
     <% posts.each do |post| %>
         <p><%= post["timestamp"] %></p>
         <h2><%= post["giver"] %>: <strong>+20 @<%= post["receiver"] %></strong></h2>
-        <h3><%= post["message"] %></h3>
+        <div class="messages">
+            <h3><%= post["message"] %></h3>
+        </div>
         <img src="<%= post["image_url"] %>" alt="">
         <hr>
     <% end %>
