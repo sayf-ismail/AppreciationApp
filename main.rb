@@ -14,11 +14,27 @@ end
 
 get '/' do
   posts = run_sql("SELECT * FROM posts")
+  users = run_sql("SELECT * FROM users")
   erb :'/wallposts/index', locals: {
-    posts: posts
+    posts: posts,
+    users: users
   }
 end
 
+get '/users/signup' do
+  erb :'/users/signup'
+end
 
+post '/users' do
+  user_handle = params['user_handle']
+  user_email = params['user_email']
+  user_password = params['password']
+  user_image_url = params['user_image_url']
 
+  password_digest = BCrypt::Password.create(user_password)
+
+  run_sql("INSERT INTO users(user_handle, email, user_password, user_image_URL) VALUES('#{user_handle}', '#{email}', '#{user_password}', '#{user_image_URL}')")
+
+  redirect '/'
+end
 

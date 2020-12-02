@@ -1,3 +1,9 @@
 img {
     width: 300px;
 }
+
+section {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
