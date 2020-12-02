@@ -27,7 +27,6 @@
 
             <input type="text" id="messages" name="user_posts" placeholder="Your message..."><br>
             
-            <label for="">Image/GIF URL</label><br>
             <input type="text" id="post_image" name="post_image" placeholder="Paste URL here..."><br>
 
             <input type="submit" value="Share Your Appreciation">
@@ -37,7 +36,7 @@
 
 <% end %>
 
-    <% posts.each do |post| %>
+    <% posts.reverse.each do |post| %>
         <p><%= post["timestamp"] %></p>
         <h2><%= post["giver"] %>: <strong>+20 @<%= post["receiver"] %></strong></h2>
         <div class="messages">
