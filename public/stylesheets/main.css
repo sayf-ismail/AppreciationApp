@@ -8,6 +8,6 @@ section {
     text-align: center;
 }
 
-.messages {
+div .messages {
     width: 300px;
 }
