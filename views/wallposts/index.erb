@@ -17,8 +17,8 @@
             
             <select name="receiver" id="receiver">
                 <% users.each do |user| %>
-                    <option value="<% user["user_handle"] %>">
-                        <% user["user_handle"] %>
+                    <option value="<%= user["user_handle"] %>">
+                        <%= user["user_handle"] %>
                     </option>
                 <% end %>
             </select><br>
