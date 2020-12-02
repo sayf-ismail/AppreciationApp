@@ -1,7 +1,12 @@
 <h1>GraGo</h1>
 <h4>Gratitude on the Go!</h4>
 
-<% posts.each do |post| %>
-    
+<a href="/signup">New User? Sign Up!</a><br>
+<a href="/login">Existing User? Log In!</a><br>
 
+<% posts.each do |post| %>
+    <p><%= post["timestamp"] %></p>
+    <h2><%= post["giver"] %>: <strong>+20 @<%= post["receiver"] %></strong></h2>
+    <h3><%= post["message"] %></h3>
+    <img src="<%= post["image_url"] %>" alt="">
 <% end %>
