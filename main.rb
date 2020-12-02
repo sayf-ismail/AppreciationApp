@@ -1,14 +1,18 @@
      
 require 'sinatra'
-require 'sinatra/reloader'
-require 'pg'
-require 'pry'
-require 'bcrypt'
+require 'sinatra/reloader' if development?
 
-get '/' do
-  erb :'/wallposts/index'
+def run_sql(sql)
+  db = PG.connect(ENV['DATABASE_URL'] || {dbname: 'appreciation_app_db'})
+  result = db.exec(sql)
+  db.close
+  return result
 end
 
+get '/' do
+  run_sql("SELECT * FROM posts;")
+  erb :'/wallposts/index'
+end
 
 
 
