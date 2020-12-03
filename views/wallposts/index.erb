@@ -38,7 +38,7 @@
 
     <% posts.reverse_each do |post| %>
         <p><%= post["timestamp"] %></p>
-        <h2><%= post["giver"] %>: <strong>+20 @<%= post["receiver"] %></strong></h2>
+        <div id="profile_pic"><img id="profile_pic" src="<%= users[(post["user_id"].to_i)-1]["user_image_url"] %>" alt=""></div><p> <%= users[(post["user_id"].to_i)-1]["user_handle"] %>: <strong>+20 @<%= post["receiver"] %></strong></p>
         <div class="messages">
             <h3><%= post["message"] %></h3>
         </div>

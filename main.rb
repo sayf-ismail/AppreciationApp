@@ -40,7 +40,8 @@ end
 
 get '/' do
   posts = run_sql("SELECT * FROM posts")
-  users = run_sql("SELECT * FROM users")
+  users = run_sql("SELECT * FROM users").to_a
+  binding.pry
   erb :'/wallposts/index', locals: {
     posts: posts,
     users: users
