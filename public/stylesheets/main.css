@@ -50,6 +50,6 @@ div .inputform {
   display: inline;
 }
 
-#messages {
-  height: 100px;
+hr {
+  width: 350px;
 }

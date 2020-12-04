@@ -40,6 +40,12 @@ def time_check(post_time)
   return time_interval_string
 end
 
+def comments_check(post_id)
+  comment_message_userid = run_sql("SELECT user_id, message FROM comments WHERE post_id=#{post_id}").to_a
+
+  return 
+end
+
 def run_sql(sql)
   db = PG.connect(ENV['DATABASE_URL'] || {dbname: 'appreciation_app_db'})
   results = db.exec(sql)
@@ -50,10 +56,12 @@ end
 get '/' do
   posts = run_sql("SELECT * FROM posts")
   users = run_sql("SELECT * FROM users").to_a
+  comments = run_sql("SELECT * FROM comments")
 
   erb :'/wallposts/index', locals: {
     posts: posts,
-    users: users
+    users: users,
+    comments: comments
   }
 end
 

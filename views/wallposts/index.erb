@@ -25,11 +25,11 @@
 
             <input type="hidden" id="giverinput" name="giver" value="<%= current_user()['user_handle'] %>">
 
-            <input type="text" id="messages" name="user_posts" placeholder="Your message..."><br>
+            <textarea id="messages" name="user_posts" placeholder="Your appreciation message..." rows="4" cols="33"></textarea><br>
             
             <input type="text" id="post_image" name="post_image" placeholder="Paste a GIF URL here..."><br>
 
-            <input type="submit" value="Share Your Appreciation">
+            <input id="submit1" type="submit" value="Share Your Appreciation">
         </form>
     </div>
 
@@ -41,12 +41,45 @@
             <%= DateTime.parse(post["timestamp"]).strftime("%Y-%m-%d %H:%M") %>
             <%= time_check(post["timestamp"]) %>
         </p>
-        <div id="profile_pic"><img id="profile_pic" src="<%= users[(post["user_id"].to_i)-1]["user_image_url"] %>" alt=""> <%= users[(post["user_id"].to_i)-1]["user_handle"] %>:</div>
-        <p>  <strong>+20 @<%= post["receiver"] %></strong></p>
+        <div id="profile_pic">
+            <img id="profile_pic" src="<%= users[(post["user_id"].to_i)-1]["user_image_url"] %>" alt=""> <%= users[(post["user_id"].to_i)-1]["user_handle"] %>:
+        </div>
+        <p>  
+            <strong>+20 @<%= post["receiver"] %></strong>
+        </p>
         <div class="messages">
             <h3><%= post["message"] %></h3>
         </div>
-        <img src="<%= post["image_url"] %>" alt="">
+        <img src="<%= post["image_url"] %>" alt=""><br>
+
+        <% comments.each do |comment| %>
+            <% if post["id"]==comment["post_id"] %>
+                <img id="profile_pic" src="<%= users[(comment["user_id"].to_i)-1]["user_image_url"] %>" alt=""> <%= users[(comment["user_id"].to_i)-1]["user_handle"] %>: <%= comment["message"]%> <br>
+            <% end %>
+        <% end %>
+
+        <div class="inputform">
+            <form id="mainForm">
+                <a id="clickme" href="javascript:;">Add Comment</a>
+                <input id="submitme" type="submit" />
+            </form>
+        </div>
         <hr>
     <% end %>
+   
+    <script type="text/javascript">    
+        var mainForm = document.getElementById("mainForm"),
+            textBox = document.createElement("input");
+
+        textBox.id="tmpTextBox";
+        textBox.type="text";
+
+        document.getElementById("clickme").onclick = function () {
+            mainForm.appendChild(textBox);
+        }
+
+        document.getElementById("submitme").onclick = function () {
+            mainForm.removeChild(textBox);
+        }
+    </script>
 </section>
