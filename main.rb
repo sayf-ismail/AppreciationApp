@@ -31,6 +31,15 @@ def current_user
   end
 end
 
+def time_check(post_time)
+  time_diff = run_sql("SELECT current_timestamp::timestamp - '#{post_time}'::timestamp;").to_a
+
+  time_parts = time_diff[0]["?column?"].split(":")
+  time_interval_string = time_parts[0]+" hours "+time_parts[1]+" mins ago"
+
+  return time_interval_string
+end
+
 def run_sql(sql)
   db = PG.connect(ENV['DATABASE_URL'] || {dbname: 'appreciation_app_db'})
   results = db.exec(sql)
@@ -41,7 +50,7 @@ end
 get '/' do
   posts = run_sql("SELECT * FROM posts")
   users = run_sql("SELECT * FROM users").to_a
-  binding.pry
+
   erb :'/wallposts/index', locals: {
     posts: posts,
     users: users

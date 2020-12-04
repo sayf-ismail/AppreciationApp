@@ -27,7 +27,7 @@
 
             <input type="text" id="messages" name="user_posts" placeholder="Your message..."><br>
             
-            <input type="text" id="post_image" name="post_image" placeholder="Paste URL here..."><br>
+            <input type="text" id="post_image" name="post_image" placeholder="Paste a GIF URL here..."><br>
 
             <input type="submit" value="Share Your Appreciation">
         </form>
@@ -37,8 +37,12 @@
 <% end %>
 
     <% posts.reverse_each do |post| %>
-        <p><%= post["timestamp"] %></p>
-        <div id="profile_pic"><img id="profile_pic" src="<%= users[(post["user_id"].to_i)-1]["user_image_url"] %>" alt=""></div><p> <%= users[(post["user_id"].to_i)-1]["user_handle"] %>: <strong>+20 @<%= post["receiver"] %></strong></p>
+        <p>
+            <%= DateTime.parse(post["timestamp"]).strftime("%Y-%m-%d %H:%M") %>
+            <%= time_check(post["timestamp"]) %>
+        </p>
+        <div id="profile_pic"><img id="profile_pic" src="<%= users[(post["user_id"].to_i)-1]["user_image_url"] %>" alt=""> <%= users[(post["user_id"].to_i)-1]["user_handle"] %>:</div>
+        <p>  <strong>+20 @<%= post["receiver"] %></strong></p>
         <div class="messages">
             <h3><%= post["message"] %></h3>
         </div>

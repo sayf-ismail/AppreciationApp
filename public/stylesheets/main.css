@@ -49,3 +49,7 @@ div .inputform {
   width: 30px;
   display: inline;
 }
+
+#messages {
+  height: 100px;
+}
