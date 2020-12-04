@@ -70,7 +70,15 @@ post '/wallposts' do
   receiver = params["receiver"]
   user_posts = params["user_posts"]
   post_image = params["post_image"]
-  run_sql("INSERT INTO posts(giver, receiver, message, timestamp, image_url) VALUES('#{giver}', '#{receiver}', '#{user_posts}', current_timestamp, '#{post_image}')")
+  commenter = params["commenter"]
+  comment_message = params["comment_input"]
+  comment_post_id = params["post_id"]
+
+  if comment_post_id == ""
+    run_sql("INSERT INTO posts(giver, receiver, message, timestamp, image_url) VALUES('#{giver}', '#{receiver}', '#{user_posts}', current_timestamp, '#{post_image}')")
+  else
+    run_sql("INSERT INTO comments(message, post_id, user_id) VALUES('#{comment_message}', #{comment_post_id.to_i}, #{commenter.to_i})")
+  end
 
   redirect '/'
 end

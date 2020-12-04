@@ -54,32 +54,34 @@
 
         <% comments.each do |comment| %>
             <% if post["id"]==comment["post_id"] %>
-                <img id="profile_pic" src="<%= users[(comment["user_id"].to_i)-1]["user_image_url"] %>" alt=""> <%= users[(comment["user_id"].to_i)-1]["user_handle"] %>: <%= comment["message"]%> <br>
+                <div class="messages"><img id="profile_pic_comment" src="<%= users[(comment["user_id"].to_i)-1]["user_image_url"] %>" alt=""> <%= users[(comment["user_id"].to_i)-1]["user_handle"] %>: <%= comment["message"]%></div> <br>
             <% end %>
         <% end %>
 
         <div class="inputform">
-            <form id="mainForm">
+            <form action="/wallposts" id="commentForm" method="POST">
                 <a id="clickme" href="javascript:;">Add Comment</a>
-                <input id="submitme" type="submit" />
+                <input type="hidden" name="post_id" value="<%= post["id"] %>">
+                <input type="hidden" name="commenter" value="<%= current_user()['id'] %>">
+                <button>Comment</button>
             </form>
         </div>
         <hr>
     <% end %>
    
     <script type="text/javascript">    
-        var mainForm = document.getElementById("mainForm"),
+        var commentForm = document.getElementById("commentForm"),
             textBox = document.createElement("input");
 
-        textBox.id="tmpTextBox";
+        textBox.name="comment_input";
         textBox.type="text";
 
         document.getElementById("clickme").onclick = function () {
-            mainForm.appendChild(textBox);
+            commentForm.appendChild(textBox);
         }
 
         document.getElementById("submitme").onclick = function () {
-            mainForm.removeChild(textBox);
+            commentForm.removeChild(textBox);
         }
     </script>
 </section>

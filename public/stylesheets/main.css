@@ -50,6 +50,11 @@ div .inputform {
   display: inline;
 }
 
+#profile_pic_comment {
+  width: 15px;
+  display: inline;
+}
+
 hr {
   width: 350px;
 }
