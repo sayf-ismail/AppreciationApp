@@ -29,7 +29,7 @@
 
 **Other ways I solved for general problems were:**
 
-Getting help from wiser teachers
-Googling
-W3Schools
-Postgresql/Sinatra/Ruby documentation
++ Getting help from wiser teachers
++ Googling
++ W3Schools
++ Postgresql/Sinatra/Ruby documentation
