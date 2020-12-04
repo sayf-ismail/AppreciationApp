@@ -57,17 +57,20 @@
                 <div class="messages"><img id="profile_pic_comment" src="<%= users[(comment["user_id"].to_i)-1]["user_image_url"] %>" alt=""> <%= users[(comment["user_id"].to_i)-1]["user_handle"] %>: <%= comment["message"]%></div> <br>
             <% end %>
         <% end %>
+        <% if logged_in?%>
+            <div class="inputform">
+                <form action="/wallposts" id="commentForm" method="POST">
+                    <a id="clickme" href="javascript:;">Add Comment</a>
+                    <input type="hidden" name="post_id" value="<%= post["id"] %>">
+                    <input type="hidden" name="commenter" value="<%= current_user()["id"] %>">
+                    <button>Comment</button>
+                </form>
+            </div>
+        <% end %>
 
-        <div class="inputform">
-            <form action="/wallposts" id="commentForm" method="POST">
-                <a id="clickme" href="javascript:;">Add Comment</a>
-                <input type="hidden" name="post_id" value="<%= post["id"] %>">
-                <input type="hidden" name="commenter" value="<%= current_user()['id'] %>">
-                <button>Comment</button>
-            </form>
-        </div>
         <hr>
     <% end %>
+    
    
     <script type="text/javascript">    
         var commentForm = document.getElementById("commentForm"),
