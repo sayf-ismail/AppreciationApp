@@ -14,3 +14,6 @@ INSERT INTO users(user_handle, email, user_image_URL) VALUES('@jonsnow', 'js@got
 INSERT INTO users(user_handle, email, user_image_URL) VALUES('@voldemort', 'he-who-must-not-be-named@hp.com', 'https://www.flaticon.com/svg/static/icons/svg/2332/2332786.svg');
 
 UPDATE posts SET image_url='https://media4.giphy.com/media/LLxwPAjfpLak8/200.gif' WHERE id=2;
+
+
+UPDATE posts SET user_id=1 WHERE id=1;
